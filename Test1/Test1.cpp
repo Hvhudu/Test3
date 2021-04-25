@@ -11,8 +11,9 @@ using namespace std;
 int main()
 {
 	
-	typedef map < string, vector<int>> SchoolBook;
-
+	map < string, vector<int>> SchoolBook;
+	pair< string, vector<int>> elem;
+	vector<int>elem1;
 	string line;
 	string Surname;
 	int pos;
@@ -24,9 +25,24 @@ int main()
 		getline(file, line);
 		pos=line.find('-');
 		Surname = line.substr(0, pos);
-		line = line.substr(pos + 1);
-		pos = line.find(',');
-		int num = stoi(line.substr(0, pos));
+		elem.first = Surname;
+		do {
+			line = line.substr(pos + 1);
+			pos = line.find(',');
+			int num = stoi(line.substr(0, pos));
+			elem1.push_back(num);
+		} while (line != ';');
+		elem.second = elem1;
+		SchoolBook.insert(elem);
+	}
+	file.close();
 
+	for (auto elem : SchoolBook) {
+		
+		cout << elem.first;
+		for (auto item : elem.second) {
+
+			cout << item;
+		}
 	}
 }
